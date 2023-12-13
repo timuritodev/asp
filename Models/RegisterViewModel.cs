@@ -1,8 +1,18 @@
-namespace ASP.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
-public class RegisterViewModel
+
+namespace ASP.Models
 {
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public string Email { get; set; }
+    public class RegisterViewModel
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+
+        // Добавленные свойства для DropDownList и RadioButton
+        // public List<SelectListItem> CountryList { get; set; }
+        public string SelectedCountry { get; set; }
+        public Gender Gender { get; set; }
+    }
 }

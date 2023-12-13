@@ -3,6 +3,8 @@
 <h2>Register</h2>
 
 <form asp-action="Register" method="post">
+    <!-- Ваши поля ввода и другие элементы формы -->
+
     <div class="form-group">
         <label asp-for="Username">Username:</label>
         <input asp-for="Username" class="form-control" />
@@ -21,5 +23,32 @@
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
+  @* <div class="form-group">
+    <label asp-for="SelectedCountry">Country:</label>
+    <select asp-for="SelectedCountry" asp-items="@Model.CountryList" class="form-control">
+        <option value="">Select Country</option>
+    </select>
+    <span asp-validation-for="SelectedCountry" class="text-danger"></span>
+</div> *@
+<div class="form-group">
+    <label asp-for="SelectedCountry">Country:</label>
+    <select asp-for="SelectedCountry" class="form-control">
+        <option value="">Select Country</option>
+        <option value="USA">United States</option>
+        <option value="Canada">Canada</option>
+        <!-- Добавьте другие страны по аналогии -->
+    </select>
+    <span asp-validation-for="SelectedCountry" class="text-danger"></span>
+</div>
+
+
+    <div class="form-group">
+        <label asp-for="Gender">Gender:</label>
+        <label><input id="male" type="radio" asp-for="Gender" value="Male" /> Male</label>
+        <label><input id="female" type="radio" asp-for="Gender" value="Female" /> Female</label>
+    </div>
+
+
+    <!-- Кнопка отправки формы -->
     <button type="submit" class="btn btn-primary">Register</button>
 </form>

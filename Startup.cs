@@ -15,6 +15,10 @@ namespace ASP
             services.AddDbContext<ApplicationDbContext>(options =>
      options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 1, 0))));
             services.AddControllersWithViews();
+            services.AddLogging(loggingBuilder =>
+    {
+        loggingBuilder.AddConsole(); // Это добавляет вывод в консоль
+    });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,11 +44,11 @@ namespace ASP
             defaults: new { controller = "Account", action = "RegistrationSuccess" }
         );
 
-        endpoints.MapControllerRoute(
-            name: "loginSuccess",
-            pattern: "account/loginsuccess",
-            defaults: new { controller = "Account", action = "LoginSuccess" }
-        );
+       endpoints.MapControllerRoute(
+           name: "loginSuccess",
+           pattern: "account/loginsuccess",
+           defaults: new { controller = "Account", action = "LoginSuccess" }
+       );
 
 
 
