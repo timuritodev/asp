@@ -27,15 +27,23 @@ namespace ASP
            defaults: new { controller = "Account", action = "Register" }
        );
        endpoints.MapControllerRoute(
-           name: "login",
-           pattern: "account/login",
-           defaults: new { controller = "Account", action = "Login" }
-       );
+    name: "login",
+    pattern: "account/login",
+    defaults: new { controller = "Account", action = "Login" }
+);
+
+
 
        endpoints.MapControllerRoute(
             name: "registrationSuccess",
             pattern: "account/registrationsuccess",
             defaults: new { controller = "Account", action = "RegistrationSuccess" }
+        );
+
+        endpoints.MapControllerRoute(
+            name: "loginSuccess",
+            pattern: "account/loginsuccess",
+            defaults: new { controller = "Account", action = "LoginSuccess" }
         );
 
 

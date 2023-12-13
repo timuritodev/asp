@@ -52,5 +52,39 @@ namespace ASP.Controllers
             // Если ModelState не валиден, верните представление с ошибками
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Username == model.Username && u.PasswordHash == model.Password);
+
+                if (user != null)
+                {
+                    // Успешный вход. Выполните необходимые действия, например, установка куки аутентификации и т. д.
+                    // Пример:
+                    // await HttpContext.SignInAsync(user.Username, model.RememberMe);
+
+                    return RedirectToAction("LoginSuccess");
+                }
+
+                ModelState.AddModelError("", "Invalid login attempt");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult LoginSuccess()
+        {
+            return View();
+        }
     }
 }
