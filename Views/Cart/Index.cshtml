@@ -1,0 +1,23 @@
+@model List<CartItem>
+
+<h2>Your Cart</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <!-- Другие столбцы, если необходимо -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Product.Name</td> <!-- Предположим, что у вас есть свойство Name в модели Product -->
+                <td>@item.Quantity</td>
+                <!-- Другие ячейки, если необходимо -->
+            </tr>
+        }
+    </tbody>
+</table>

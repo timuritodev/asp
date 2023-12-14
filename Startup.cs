@@ -95,9 +95,13 @@ namespace ASP
                        defaults: new { controller = "Product", action = "List" }
                    );
                    endpoints.MapControllerRoute(
+                        name: "cart",
+                        pattern: "cart",
+                        defaults: new { controller = "Cart", action = "Index" }
+                    );
+                   endpoints.MapControllerRoute(
                        name: "default",
                        pattern: "{controller=Home}/{action=Index}/{id?}");
-
                });
 
         }

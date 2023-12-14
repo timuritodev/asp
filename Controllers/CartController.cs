@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASP.Controllers
 {
@@ -23,8 +24,7 @@ namespace ASP.Controllers
             var user = _context.Users.SingleOrDefault(u => u.Username == User.Identity.Name);
 
             // Проверьте, есть ли уже такой товар в корзине пользователя
-var existingCartItem = _context.CartItems.SingleOrDefault(ci => ci.ProductId == productId && ci.UserId == user.UserId);
-
+            var existingCartItem = _context.CartItems.SingleOrDefault(ci => ci.ProductId == productId && ci.UserId == user.UserId);
 
             if (existingCartItem != null)
             {
@@ -47,6 +47,26 @@ var existingCartItem = _context.CartItems.SingleOrDefault(ci => ci.ProductId == 
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Home"); // или куда-то еще
+        }
+
+        private int GetUserId()
+        {
+            // Ваш код для получения Id текущего пользователя
+            // Пример: если у вас есть свойство UserId в классе User, и текущий пользователь аутентифицирован
+            var userId = _context.Users.FirstOrDefault(u => u.Username == User.Identity.Name)?.UserId;
+            return userId ?? 0; // Если UserId не найден, возвращаем 0 (или другое значение по умолчанию)
+        }
+        
+        public IActionResult Index()
+        {
+            // Получите данные о корзине из базы данных
+            var userId = GetUserId(); // Реализуйте метод для получения Id текущего пользователя
+            var cartItems = _context.CartItems
+                .Include(ci => ci.Product) // Подгрузите связанные продукты
+                .Where(c => c.UserId == userId)
+                .ToList();
+
+            return View(cartItems);
         }
     }
 }
