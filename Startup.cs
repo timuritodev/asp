@@ -33,13 +33,12 @@ namespace ASP
            pattern: "account/register",
            defaults: new { controller = "Account", action = "Register" }
        );
+
        endpoints.MapControllerRoute(
-    name: "login",
-    pattern: "account/login",
-    defaults: new { controller = "Account", action = "Login" }
-);
-
-
+            name: "login",
+            pattern: "account/login",
+            defaults: new { controller = "Account", action = "Login" }
+        );
 
        endpoints.MapControllerRoute(
             name: "registrationSuccess",
@@ -54,15 +53,15 @@ namespace ASP
        );
 
        endpoints.MapControllerRoute(
-        name: "product",
-        pattern: "product/{action=Index}/{id?}",
-        defaults: new { controller = "Product" }
-    );
+            name: "product",
+            pattern: "product/{action=Index}/{id?}",
+            defaults: new { controller = "Product" }
+        );
         endpoints.MapControllerRoute(
-    name: "productList",
-    pattern: "products/list",
-    defaults: new { controller = "Product", action = "List" }
-);
+            name: "productList",
+            pattern: "products/list",
+            defaults: new { controller = "Product", action = "List" }
+        );
        endpoints.MapControllerRoute(
            name: "default",
            pattern: "{controller=Home}/{action=Index}/{id?}");

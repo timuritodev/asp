@@ -1,31 +1,36 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ASP.Models;
+using Microsoft.Extensions.Logging; // Добавьте это пространство имен
 
-namespace ASP.Controllers;
-
-public class HomeController : Controller
+namespace ASP.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context; // Добавьте это поле
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context) // Добавьте ApplicationDbContext в конструктор
+        {
+            _logger = logger;
+            _context = context; // Инициализируйте поле контекста данных
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        public IActionResult Index()
+        {
+            var products = _context.Products.ToList(); // Получите список продуктов из базы данных
+            return View(products); // Передайте список продуктов в представление
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
