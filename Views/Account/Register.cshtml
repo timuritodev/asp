@@ -20,17 +20,20 @@
         <input asp-for="Email" class="form-control" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-<div class="form-group">
-    <label asp-for="SelectedCountry">Country:</label>
-    <select asp-for="SelectedCountry" class="form-control">
-        <option value="">Select Country</option>
-        <option value="USA">United States</option>
-        <option value="Canada">Canada</option>
-    </select>
-    <span asp-validation-for="SelectedCountry" class="text-danger"></span>
-</div>
-
-
+    <div class="form-group">
+        <label asp-for="SelectedCountry">Country:</label>
+        <select asp-for="SelectedCountry" class="form-control">
+            <option value="">Select Country</option>
+            <option value="USA">United States</option>
+            <option value="Canada">Canada</option>
+        </select>
+        <span asp-validation-for="SelectedCountry" class="text-danger"></span>
+    </div>
+    @* <div class="form-group">
+        <label>Date of Birth:</label>
+        <input class="form-control" type="date" />
+        <span class="text-danger"></span>
+    </div> *@
     <div class="form-group">
         <label asp-for="Gender">Gender:</label>
         <label><input id="male" type="radio" asp-for="Gender" value="Male" /> Male</label>

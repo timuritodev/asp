@@ -17,8 +17,16 @@ namespace ASP.Controllers
         }
 
         [HttpPost]
+        [HttpPost]
         public IActionResult AddToCart(int productId, int quantity)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                // Если пользователь не аутентифицирован, вернуть представление с сообщением
+                TempData["ErrorMessage"] = "Please log in or register to add items to your cart.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var user = _context.Users.SingleOrDefault(u => u.Username == User.Identity.Name);
             var existingCartItem = _context.CartItems.SingleOrDefault(ci => ci.ProductId == productId && ci.UserId == user.UserId);
 
@@ -42,6 +50,7 @@ namespace ASP.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
 
         private int GetUserId()
         {
