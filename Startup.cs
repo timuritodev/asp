@@ -100,6 +100,11 @@ namespace ASP
                         defaults: new { controller = "Cart", action = "Index" }
                     );
                    endpoints.MapControllerRoute(
+                        name: "logout",
+                        pattern: "/Account/Logout",
+                        defaults: new { controller = "Account", action = "Logout" }
+                    );
+                   endpoints.MapControllerRoute(
                        name: "default",
                        pattern: "{controller=Home}/{action=Index}/{id?}");
                });

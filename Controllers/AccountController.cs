@@ -85,48 +85,57 @@ namespace ASP.Controllers
         }
 
         [HttpPost]
-public async Task<IActionResult> Login(LoginViewModel model)
-{
-    if (ModelState.IsValid)
-    {
-        var user = _context.Users.FirstOrDefault(u => u.Username == model.Username);
-
-        if (user != null && user.PasswordHash == model.Password.ToString())
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var claims = new List<Claim>
+            if (ModelState.IsValid)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Username == model.Username);
+
+                if (user != null && user.PasswordHash == model.Password.ToString())
+                {
+                    var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Email, user.Email),
                 // Добавьте другие необходимые claim'ы
             };
 
-            var claimsIdentity = new ClaimsIdentity(
-                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimsIdentity = new ClaimsIdentity(
+                        claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            var authProperties = new AuthenticationProperties
-            {
-                // Дополнительные свойства аутентификации, если необходимо
-            };
+                    var authProperties = new AuthenticationProperties
+                    {
+                        // Дополнительные свойства аутентификации, если необходимо
+                    };
 
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties);
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity),
+                        authProperties);
 
-            return RedirectToAction("LoginSuccess");
+                    return RedirectToAction("LoginSuccess");
+                }
+
+                ModelState.AddModelError("", "Invalid login attempt");
+            }
+
+            return View(model);
         }
-
-        ModelState.AddModelError("", "Invalid login attempt");
-    }
-
-    return View(model);
-}
 
 
         [HttpGet]
         public IActionResult LoginSuccess()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            // Выполняем выход из аккаунта
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index", "Home"); // Или другой метод, куда вы хотите перенаправить после выхода
         }
     }
 }

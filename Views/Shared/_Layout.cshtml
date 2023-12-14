@@ -12,7 +12,8 @@
 
 <body>
     <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light @(User.Identity.IsAuthenticated ? "bg-success" : "bg-primary") border-bottom box-shadow mb-3">
+        <nav
+            class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light @(User.Identity.IsAuthenticated ? "bg-success" : "bg-primary") border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ASP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
@@ -41,6 +42,15 @@
                             <a class="nav-link text-dark" href="~/Cart">Cart</a>
                         </li>
                     </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account"
+                                    asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    }
                     <p>@User.Identity.Name</p>
                 </div>
             </div>
