@@ -11,5 +11,6 @@ namespace ASP.Models
         public string Email { get; set; }
         public string SelectedCountry { get; set; }
         public string Gender { get; set; }
+        public DateTime BirthDate { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 @model List<CartItem>
 
-<h2>Your cart</h2>
+<h1>Your cart</h1>
 
 <link rel="stylesheet" href="~/css/cart.css" />
 
@@ -11,7 +11,8 @@
         <div class="product-card">
             <h3>@item.Product.Name</h3>
             <p>@item.Product.Description</p>
-            <p>@item.Product.Price</p>
+            <p>@item.Product.Price ₽</p>
+            <p>В наличии: @item.Product.InStock </p>
             <img class="product-image" src="@item.Product.ImageUrl" alt="@item.Product.Name" />
             <p>Добавлено: @item.Quantity</p>
         </div>

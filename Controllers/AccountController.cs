@@ -51,7 +51,8 @@ namespace ASP.Controllers
                     PasswordHash = model.Password,
                     Email = model.Email,
                     SelectedCountry = model.SelectedCountry,
-                    Gender = model.Gender
+                    Gender = model.Gender,
+                    BirthDate = model.BirthDate // Установка свойства BirthDate
                 };
 
                 _logger.LogInformation($"Registering user: Username={user.Username}, Email={user.Email}, Country={user.SelectedCountry}, Gender={user.Gender}");

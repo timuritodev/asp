@@ -4,7 +4,7 @@
     ViewData["Title"] = "Products";
 }
 
-<h1>Product Index</h1>
+<h1>All Products</h1>
 
 <div>
     @if (Model != null && Model.Any())
@@ -14,7 +14,8 @@
             <div class="product-card">
                 <h3>@product.Name</h3>
                 <p>@product.Description</p>
-                <p>@product.Price</p>
+                <p>@product.Price ₽</p>
+                <p>В наличии: @product.InStock</p>
                 @if (!string.IsNullOrEmpty(product.ImageUrl))
                 {
                     <img class="product-image" src="@product.ImageUrl" alt="@product.Name" />

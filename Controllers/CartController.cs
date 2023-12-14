@@ -51,7 +51,6 @@ namespace ASP.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
         private int GetUserId()
         {
             var userId = _context.Users.FirstOrDefault(u => u.Username == User.Identity.Name)?.UserId;

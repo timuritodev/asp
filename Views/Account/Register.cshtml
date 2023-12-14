@@ -29,11 +29,11 @@
         </select>
         <span asp-validation-for="SelectedCountry" class="text-danger"></span>
     </div>
-    @* <div class="form-group">
-        <label>Date of Birth:</label>
-        <input class="form-control" type="date" />
-        <span class="text-danger"></span>
-    </div> *@
+    <div class="form-group">
+        <label asp-for="BirthDate">Date of Birth:</label>
+        <input asp-for="BirthDate" class="form-control" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <label asp-for="Gender">Gender:</label>
         <label><input id="male" type="radio" asp-for="Gender" value="Male" /> Male</label>
