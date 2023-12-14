@@ -1,23 +1,17 @@
 @model List<CartItem>
 
-<h2>Your Cart</h2>
+<h2>Ваша корзина</h2>
 
-<table>
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <!-- Другие столбцы, если необходимо -->
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Product.Name</td> <!-- Предположим, что у вас есть свойство Name в модели Product -->
-                <td>@item.Quantity</td>
-                <!-- Другие ячейки, если необходимо -->
-            </tr>
-        }
-    </tbody>
-</table>
+<link rel="stylesheet" href="~/css/cart.css" />
+
+@foreach (var item in Model)
+{
+    <div  class="product-card">
+    <h3>@item.Product.Name</h3>
+    <p>@item.Product.Description</p>
+    <p>@item.Product.Price</p>
+    <img class="product-image" src="@item.Product.ImageUrl" alt="@item.Product.Name" />
+</div>
+}
+
+<link rel="stylesheet" href="~/css/shared.css" />

@@ -1,5 +1,4 @@
 using ASP.Models;
-
 public class CartItem
 {
     public int CartItemId { get; set; }

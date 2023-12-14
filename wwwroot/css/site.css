@@ -27,7 +27,7 @@ body {
   margin: 10px;
   text-align: center;
   width: 400px;
-  height: 450px; /* Установите желаемую ширину карточки */
+  height: 500px; /* Установите желаемую ширину карточки */
   display: inline-block; /* Разместите карточки в ряд */
 }
 
