@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddLogging(loggingBuilder =>
 {
     loggingBuilder.AddConsole(); // Это добавляет вывод в консоль
+    loggingBuilder.SetMinimumLevel(LogLevel.Information);
 });
 
 // Add database context

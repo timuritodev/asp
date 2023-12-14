@@ -13,12 +13,15 @@ namespace ASP
         {
             string connectionString = "Server=localhost;Database=asp;User=root;Password=timur2003;";
             services.AddDbContext<ApplicationDbContext>(options =>
-     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 1, 0))));
+                options
+                    .UseMySql(connectionString, new MySqlServerVersion(new Version(8, 1, 0)))
+                    .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information)
+                    .EnableSensitiveDataLogging());
             services.AddControllersWithViews();
             services.AddLogging(loggingBuilder =>
-    {
-        loggingBuilder.AddConsole(); // Это добавляет вывод в консоль
-    });
+            {
+                loggingBuilder.AddConsole(); // Это добавляет вывод в консоль
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,8 +53,16 @@ namespace ASP
            defaults: new { controller = "Account", action = "LoginSuccess" }
        );
 
-
-
+       endpoints.MapControllerRoute(
+        name: "product",
+        pattern: "product/{action=Index}/{id?}",
+        defaults: new { controller = "Product" }
+    );
+        endpoints.MapControllerRoute(
+    name: "productList",
+    pattern: "products/list",
+    defaults: new { controller = "Product", action = "List" }
+);
        endpoints.MapControllerRoute(
            name: "default",
            pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -75,12 +86,12 @@ namespace ASP
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            // app.UseEndpoints(endpoints =>
+            // {
+            //     endpoints.MapControllerRoute(
+            //         name: "default",
+            //         pattern: "{controller=Home}/{action=Index}/{id?}");
+            // });
         }
     }
 }

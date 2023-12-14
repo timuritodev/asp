@@ -1,0 +1,32 @@
+@model List<ASP.Models.Product>
+
+@{
+    ViewData["Title"] = "Product Index";
+}
+
+<h1>Product Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <!-- Добавьте другие столбцы, если есть -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <!-- Добавьте другие столбцы, если есть -->
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    console.log("Index.cshtml loaded");
+</script>
