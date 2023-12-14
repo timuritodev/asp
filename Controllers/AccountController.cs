@@ -1,8 +1,11 @@
 using ASP.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace ASP.Controllers
 {
@@ -82,22 +85,42 @@ namespace ASP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+public async Task<IActionResult> Login(LoginViewModel model)
+{
+    if (ModelState.IsValid)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Username == model.Username);
+
+        if (user != null && user.PasswordHash == model.Password.ToString())
         {
-            if (ModelState.IsValid)
+            var claims = new List<Claim>
             {
-                var user = _context.Users.FirstOrDefault(u => u.Username == model.Username && u.PasswordHash.Equals(model.Password));
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Email, user.Email),
+                // Добавьте другие необходимые claim'ы
+            };
 
-                if (user != null)
-                {
-                    return RedirectToAction("LoginSuccess");
-                }
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                ModelState.AddModelError("", "Invalid login attempt");
-            }
+            var authProperties = new AuthenticationProperties
+            {
+                // Дополнительные свойства аутентификации, если необходимо
+            };
 
-            return View(model);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
+
+            return RedirectToAction("LoginSuccess");
         }
+
+        ModelState.AddModelError("", "Invalid login attempt");
+    }
+
+    return View(model);
+}
 
 
         [HttpGet]

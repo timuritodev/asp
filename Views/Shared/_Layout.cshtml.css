@@ -1,6 +1,18 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+/* Добавьте стили для залогиненного пользователя */
+.loggedInHeader {
+  background-color: #00FF00; /* Зеленый цвет, если пользователь залогинен */
+  /* Другие стили */
+}
+
+/* Добавьте стили для гостя */
+.loggedOutHeader {
+  background-color: #FF0000; /* Красный цвет, если пользователь не залогинен */
+  /* Другие стили */
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;

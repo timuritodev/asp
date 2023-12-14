@@ -11,5 +11,6 @@ namespace ASP.Models
         // Добавьте здесь DbSet для ваших сущностей
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
     }
 }

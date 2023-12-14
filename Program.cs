@@ -1,6 +1,7 @@
 using ASP.Models;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,7 +12,14 @@ builder.Services.AddLogging(loggingBuilder =>
     loggingBuilder.SetMinimumLevel(LogLevel.Information);
 });
 
-// Add database context
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}
+).AddCookie();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql("Server=localhost;Database=asp;User=root;Password=timur2003;",
         new MySqlServerVersion(new Version(8, 1, 0))));
