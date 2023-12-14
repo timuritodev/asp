@@ -20,11 +20,10 @@ namespace ASP.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            // var countryList = GetCountryList();
 
             var model = new RegisterViewModel
             {
-                // CountryList = countryList
+
             };
 
             return View(model);
@@ -52,7 +51,6 @@ namespace ASP.Controllers
                     Gender = model.Gender
                 };
 
-                // Добавим дополнительные логи
                 _logger.LogInformation($"Registering user: Username={user.Username}, Email={user.Email}, Country={user.SelectedCountry}, Gender={user.Gender}");
 
                 _context.Users.Add(user);
@@ -62,7 +60,6 @@ namespace ASP.Controllers
             }
             else
             {
-                // Выводим ошибки валидации в лог
                 _logger.LogInformation("Model state is not valid.");
                 foreach (var key in ModelState.Keys)
                 {
@@ -89,7 +86,7 @@ namespace ASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _context.Users.FirstOrDefault(u => u.Username == model.Username && u.PasswordHash == model.Password);
+                var user = _context.Users.FirstOrDefault(u => u.Username == model.Username && u.PasswordHash.Equals(model.Password));
 
                 if (user != null)
                 {
@@ -102,28 +99,11 @@ namespace ASP.Controllers
             return View(model);
         }
 
+
         [HttpGet]
         public IActionResult LoginSuccess()
         {
             return View();
-        }
-
-        // Вспомогательный метод для получения списка стран
-        private List<SelectListItem> GetCountryList()
-        {
-            return new List<SelectListItem>
-            {
-                new SelectListItem { Value = "USA", Text = "United States" },
-                new SelectListItem { Value = "Canada", Text = "Canada" },
-                new SelectListItem { Value = "UK", Text = "United Kingdom" },
-                new SelectListItem { Value = "Germany", Text = "Germany" },
-                new SelectListItem { Value = "France", Text = "France" },
-                new SelectListItem { Value = "Australia", Text = "Australia" },
-                new SelectListItem { Value = "Japan", Text = "Japan" },
-                new SelectListItem { Value = "China", Text = "China" },
-                new SelectListItem { Value = "Brazil", Text = "Brazil" },
-                new SelectListItem { Value = "India", Text = "India" }
-            };
         }
     }
 }
