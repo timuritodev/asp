@@ -1,30 +1,25 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ASP.Models;
-using Microsoft.Extensions.Logging; // Добавьте это пространство имен
+using Microsoft.Extensions.Logging;
 
 namespace ASP.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _context; // Добавьте это поле
+        private readonly ApplicationDbContext _context; 
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context) // Добавьте ApplicationDbContext в конструктор
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context) 
         {
             _logger = logger;
-            _context = context; // Инициализируйте поле контекста данных
+            _context = context; 
         }
 
         public IActionResult Index()
         {
-            var products = _context.Products.ToList(); // Получите список продуктов из базы данных
-            return View(products); // Передайте список продуктов в представление
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            var products = _context.Products.Take(3).ToList();
+            return View(products); 
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

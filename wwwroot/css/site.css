@@ -27,11 +27,11 @@ body {
   margin: 10px;
   text-align: center;
   width: 400px;
-  height: 500px; /* Установите желаемую ширину карточки */
-  display: inline-block; /* Разместите карточки в ряд */
+  height: 500px;
+  display: inline-block;
 }
 
 .product-image {
-  max-width: 300px; /* Сделайте изображение адаптивным к ширине карточки */
-  max-height: 300px; /* Сделайте изображение адаптивным к высоте карточки */
+  width: 300px; 
+  height: 300px; 
 }

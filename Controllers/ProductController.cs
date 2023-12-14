@@ -28,7 +28,7 @@ namespace ASP.Controllers
 
                 _logger.LogInformation($"Found {products.Count} products.");
 
-                return View(products); // Вот этот код важен, чтобы передать данные в представление.
+                return View(products); 
             }
             catch (Exception ex)
             {

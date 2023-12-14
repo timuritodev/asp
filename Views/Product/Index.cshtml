@@ -19,6 +19,11 @@
                 {
                     <img class="product-image" src="@product.ImageUrl" alt="@product.Name" />
                 }
+                <form method="post" asp-action="AddToCart" asp-controller="Cart">
+                    <input type="hidden" name="productId" value="@product.ProductId" />
+                    <input type="number" name="quantity" value="1" min="1" />
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
             </div>
         }
     }

@@ -59,12 +59,10 @@ namespace ASP.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
-                // Выполняем вход после регистрации
                 var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.Username),
             new Claim(ClaimTypes.Email, user.Email),
-            // Добавьте другие необходимые claim'ы
         };
 
                 var claimsIdentity = new ClaimsIdentity(
@@ -72,7 +70,6 @@ namespace ASP.Controllers
 
                 var authProperties = new AuthenticationProperties
                 {
-                    // Дополнительные свойства аутентификации, если необходимо
                 };
 
                 await HttpContext.SignInAsync(
@@ -117,7 +114,6 @@ namespace ASP.Controllers
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Email, user.Email),
-                // Добавьте другие необходимые claim'ы
             };
 
                     var claimsIdentity = new ClaimsIdentity(
@@ -125,7 +121,6 @@ namespace ASP.Controllers
 
                     var authProperties = new AuthenticationProperties
                     {
-                        // Дополнительные свойства аутентификации, если необходимо
                     };
 
                     await HttpContext.SignInAsync(
@@ -152,10 +147,9 @@ namespace ASP.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            // Выполняем выход из аккаунта
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Index", "Home"); // Или другой метод, куда вы хотите перенаправить после выхода
+            return RedirectToAction("Index", "Home");
         }
     }
 }
