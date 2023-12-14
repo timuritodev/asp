@@ -4,14 +4,22 @@
 
 <link rel="stylesheet" href="~/css/cart.css" />
 
-@foreach (var item in Model)
+@if (Model.Any())
 {
-    <div  class="product-card">
-    <h3>@item.Product.Name</h3>
-    <p>@item.Product.Description</p>
-    <p>@item.Product.Price</p>
-    <img class="product-image" src="@item.Product.ImageUrl" alt="@item.Product.Name" />
-</div>
+    @foreach (var item in Model)
+    {
+        <div class="product-card">
+            <h3>@item.Product.Name</h3>
+            <p>@item.Product.Description</p>
+            <p>@item.Product.Price</p>
+            <img class="product-image" src="@item.Product.ImageUrl" alt="@item.Product.Name" />
+            <p>Добавлено: @item.Quantity</p>
+        </div>
+    }
+}
+else
+{
+    <p>Добавьте товары в корзину или зарегистрируйтесь.</p>
 }
 
 <link rel="stylesheet" href="~/css/shared.css" />

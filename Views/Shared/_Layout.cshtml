@@ -25,16 +25,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
-                                asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="~/Account/Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="~/Account/Login">Login</a>
-                        </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="~/Account/Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="~/Account/Login">Login</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="~/Product">Product</a>
                         </li>
@@ -42,6 +41,7 @@
                             <a class="nav-link text-dark" href="~/Cart">Cart</a>
                         </li>
                     </ul>
+                    <p class="navbar-item navbar-nav">@User.Identity.Name</p>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <ul class="navbar-nav">
@@ -51,7 +51,6 @@
                             </li>
                         </ul>
                     }
-                    <p>@User.Identity.Name</p>
                 </div>
             </div>
         </nav>
@@ -64,7 +63,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - ASP - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Lab4-Timur
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

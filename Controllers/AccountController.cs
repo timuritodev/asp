@@ -39,7 +39,7 @@ namespace ASP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             _logger.LogInformation("Register action called.");
 
@@ -59,7 +59,28 @@ namespace ASP.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
-                return RedirectToAction("RegistrationSuccess", "Account");
+                // Выполняем вход после регистрации
+                var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.Email, user.Email),
+            // Добавьте другие необходимые claim'ы
+        };
+
+                var claimsIdentity = new ClaimsIdentity(
+                    claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var authProperties = new AuthenticationProperties
+                {
+                    // Дополнительные свойства аутентификации, если необходимо
+                };
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
+
+                return RedirectToAction("LoginSuccess");
             }
             else
             {
@@ -76,7 +97,6 @@ namespace ASP.Controllers
 
             return View(model);
         }
-
 
         [HttpGet]
         public IActionResult Login()

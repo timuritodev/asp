@@ -10,7 +10,6 @@
 </div>
 
 <div>
-    <!-- Вывести карточки товаров здесь -->
     @if (Model != null && Model.Any())
     {
         @foreach (var product in Model)
@@ -23,8 +22,6 @@
                 {
                     <img class="product-image" src="@product.ImageUrl" alt="@product.Name" />
                 }
-
-                <!-- Добавьте кнопку или форму для добавления в корзину -->
                 <form method="post" asp-action="AddToCart" asp-controller="Cart">
                     <input type="hidden" name="productId" value="@product.ProductId" />
                     <input type="number" name="quantity" value="1" min="1" />

@@ -1,13 +1,12 @@
 @model List<ASP.Models.Product>
 
 @{
-    ViewData["Title"] = "Product Index";
+    ViewData["Title"] = "Products";
 }
 
 <h1>Product Index</h1>
 
 <div>
-    <!-- Вывести карточки товаров здесь -->
     @if (Model != null && Model.Any())
     {
         @foreach (var product in Model)
