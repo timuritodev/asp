@@ -6,27 +6,26 @@
 
 <h1>Product Index</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <!-- Добавьте другие столбцы, если есть -->
-        </tr>
-    </thead>
-    <tbody>
+<div>
+    <!-- Вывести карточки товаров здесь -->
+    @if (Model != null && Model.Any())
+    {
         @foreach (var product in Model)
         {
-            <tr>
-                <td>@product.Name</td>
-                <td>@product.Description</td>
-                <td>@product.Price</td>
-                <!-- Добавьте другие столбцы, если есть -->
-            </tr>
+            <div class="product-card">
+                <h3>@product.Name</h3>
+                <p>@product.Description</p>
+                <p>@product.Price</p>
+                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                {
+                    <img class="product-image" src="@product.ImageUrl" alt="@product.Name" />
+                }
+            </div>
         }
-    </tbody>
-</table>
-<script>
-    console.log("Index.cshtml loaded");
-</script>
+    }
+    else
+    {
+        <p>No products available.</p>
+    }
+</div>
+<link rel="stylesheet" href="~/css/shared.css" />

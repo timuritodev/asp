@@ -20,3 +20,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.product-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: 400px;
+  height: 450px; /* Установите желаемую ширину карточки */
+  display: inline-block; /* Разместите карточки в ряд */
+}
+
+.product-image {
+  max-width: 300px; /* Сделайте изображение адаптивным к ширине карточки */
+  max-height: 300px; /* Сделайте изображение адаптивным к высоте карточки */
+}
