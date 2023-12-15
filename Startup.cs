@@ -54,7 +54,6 @@ namespace ASP
 
             app.UseRouting();
 
-            // Разместите вызовы ниже после UseRouting и перед UseEndpoints
             app.UseAuthentication();
             app.UseAuthorization();
 

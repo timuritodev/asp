@@ -22,7 +22,6 @@ namespace ASP.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-                // Если пользователь не аутентифицирован, вернуть представление с сообщением
                 TempData["ErrorMessage"] = "Please log in or register to add items to your cart.";
                 return RedirectToAction("Index", "Home");
             }
