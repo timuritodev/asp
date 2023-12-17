@@ -82,3 +82,4 @@
 /Users/timurito/dev/asp/obj/Debug/net7.0/ASP.pdb
 /Users/timurito/dev/asp/obj/Debug/net7.0/ASP.genruntimeconfig.cache
 /Users/timurito/dev/asp/obj/Debug/net7.0/ref/ASP.dll
+/Users/timurito/dev/asp/bin/Debug/net7.0/System.Security.Permissions.dll

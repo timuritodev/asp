@@ -9,6 +9,7 @@ using System.Security.Claims;
 
 namespace ASP.Controllers
 {
+    [Controller]
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -52,7 +53,7 @@ namespace ASP.Controllers
                     Email = model.Email,
                     SelectedCountry = model.SelectedCountry,
                     Gender = model.Gender,
-                    BirthDate = model.BirthDate 
+                    BirthDate = model.BirthDate
                 };
 
                 _logger.LogInformation($"Registering user: Username={user.Username}, Email={user.Email}, Country={user.SelectedCountry}, Gender={user.Gender}");
@@ -60,6 +61,10 @@ namespace ASP.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
+                // Создаем сессию и сохраняем данные в сессии
+                // HttpContext.Session.SetString("UserId", user.UserId.ToString());
+                HttpContext.Session.SetString("Username", user.Username);
+                _logger.LogInformation($"User {user.Username} registered successfully.");
                 var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.Username),
@@ -92,7 +97,6 @@ namespace ASP.Controllers
                     }
                 }
             }
-
             return View(model);
         }
 
@@ -128,6 +132,11 @@ namespace ASP.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
+
+                    // Создаем сессию и сохраняем данные в сессии
+                    // HttpContext.Session.SetString("UserId", user.UserId.ToString());
+                    HttpContext.Session.SetString("Username", user.Username);
+                    _logger.LogInformation($"User {user.Username} logged in successfully.");
 
                     return RedirectToAction("LoginSuccess");
                 }

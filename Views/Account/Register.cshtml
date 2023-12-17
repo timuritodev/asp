@@ -4,7 +4,7 @@
 
 <form asp-action="Register" method="post">
     <div class="form-group">
-        <label asp-for="Username">Username:</label>
+        <label asp-for="Username">Никнейм:</label>
         <input asp-for="Username" class="form-control" />
         <span asp-validation-for="Username" class="text-danger"></span>
     </div>
@@ -20,7 +20,7 @@
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="SelectedCountry">Country:</label>
+        <label asp-for="SelectedCountry">Страна:</label>
         <select asp-for="SelectedCountry" class="form-control">
             <option value="">Выберите стррану</option>
             <option value="USA">Россия</option>
@@ -41,5 +41,5 @@
         <label><input id="male" type="radio" asp-for="Gender" value="Male" /> Мужчина</label>
         <label><input id="female" type="radio" asp-for="Gender" value="Female" /> Женщина</label>
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary">Регистрация</button>
 </form>

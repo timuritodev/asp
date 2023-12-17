@@ -5,6 +5,7 @@ using ASP.Models;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Logging;
 
 namespace ASP
 {
@@ -12,6 +13,7 @@ namespace ASP
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
             string connectionString = "Server=localhost;Database=asp;User=root;Password=timur2003;";
             services.AddDbContext<ApplicationDbContext>(options =>
                 options
@@ -28,13 +30,15 @@ namespace ASP
                 });
 
             services.AddAuthorization();
+            services.AddDistributedMemoryCache();
 
-            services.AddControllersWithViews();
+            services.AddSession();
 
-            services.AddLogging(loggingBuilder =>
-            {
-                loggingBuilder.AddConsole();
-            });
+            services.AddLogging(builder =>
+    {
+        builder.AddConsole(); // Логирование в консоль
+        // Добавьте другие провайдеры логирования по необходимости
+    });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -56,6 +60,9 @@ namespace ASP
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
+            // app.ApplicationServices.GetRequiredService<ILogger<Startup>>().LogInformation("Session is configured successfully!");
 
             app.UseEndpoints(endpoints =>
                {
@@ -107,7 +114,6 @@ namespace ASP
                        name: "default",
                        pattern: "{controller=Home}/{action=Index}/{id?}");
                });
-
         }
     }
 }
