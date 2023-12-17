@@ -47,7 +47,6 @@ namespace ASP.Controllers
 
             var user = _context.Users.SingleOrDefault(u => u.Username == User.Identity.Name);
 
-            // Проверка наличия пользователя и получение его идентификатора
             if (user == null)
             {
                 _logger.LogError("User not found.");
@@ -76,7 +75,6 @@ namespace ASP.Controllers
 
             try
             {
-                // Обновление счетчика товаров в сессии
                 var cartItemCount = HttpContext.Session.GetInt32("CartItemCount") ?? 0;
                 cartItemCount += quantity;
                 HttpContext.Session.SetInt32("CartItemCount", cartItemCount);
@@ -86,8 +84,10 @@ namespace ASP.Controllers
                 _logger.LogError($"Error updating session: {ex.Message}");
             }
 
-            return RedirectToAction("Index", "Home");
+            // Используем Query String для передачи параметров productId и quantity
+            return Redirect($"/Home/Index?productId={productId}&quantity={quantity}");
         }
+
 
         private int GetUserId()
         {

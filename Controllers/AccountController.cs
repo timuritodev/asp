@@ -61,8 +61,7 @@ namespace ASP.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
-                // Создаем сессию и сохраняем данные в сессии
-                // HttpContext.Session.SetString("UserId", user.UserId.ToString());
+                HttpContext.Session.SetString("UserId", user.UserId.ToString());
                 HttpContext.Session.SetString("Username", user.Username);
                 _logger.LogInformation($"User {user.Username} registered successfully.");
                 var claims = new List<Claim>
@@ -133,8 +132,7 @@ namespace ASP.Controllers
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
 
-                    // Создаем сессию и сохраняем данные в сессии
-                    // HttpContext.Session.SetString("UserId", user.UserId.ToString());
+                    HttpContext.Session.SetString("UserId", user.UserId.ToString());
                     HttpContext.Session.SetString("Username", user.Username);
                     _logger.LogInformation($"User {user.Username} logged in successfully.");
 

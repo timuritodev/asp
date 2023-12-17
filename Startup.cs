@@ -35,10 +35,9 @@ namespace ASP
             services.AddSession();
 
             services.AddLogging(builder =>
-    {
-        builder.AddConsole(); // Логирование в консоль
-        // Добавьте другие провайдеры логирования по необходимости
-    });
+            {
+                builder.AddConsole();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -62,7 +61,6 @@ namespace ASP
             app.UseAuthorization();
 
             app.UseSession();
-            // app.ApplicationServices.GetRequiredService<ILogger<Startup>>().LogInformation("Session is configured successfully!");
 
             app.UseEndpoints(endpoints =>
                {
