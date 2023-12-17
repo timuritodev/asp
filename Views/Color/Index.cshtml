@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Измени цвет navbar";
+}
+
+<h1>Выбери цвет navbar</h1>
+
+<form class="mt-3" method="get" action="~/Color/ChangeColor">
+    <div class="mb-3">
+        <label for="navbarColor" class="form-label">Выбери цвет:</label>
+        <select class="form-select" name="color" id="navbarColor">
+            <option value="bg-primary">Синий</option>
+            <option value="bg-success">Зеленый</option>
+            <option value="bg-warning">Желтый</option>
+            <option value="bg-danger">Красный</option>
+            <option value="bg-info">Голубой</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Применить цвет</button>
+</form>

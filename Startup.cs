@@ -108,6 +108,11 @@ namespace ASP
                         pattern: "/Account/Logout",
                         defaults: new { controller = "Account", action = "Logout" }
                     );
+                    endpoints.MapControllerRoute(
+            name: "changeColor",
+            pattern: "color/changecolor",
+            defaults: new { controller = "Color", action = "ChangeColor" }
+        );
                    endpoints.MapControllerRoute(
                        name: "default",
                        pattern: "{controller=Home}/{action=Index}/{id?}");
