@@ -11,9 +11,14 @@
 </head>
 
 <body>
+    @{
+        var color = ViewContext.HttpContext.Request.Query["color"].ToString();
+        var backgroundColor = string.IsNullOrEmpty(color) ? "bg-primary" : color;
+    }
+
     <header>
         <nav
-            class="navbar navbar-expand-sm navbar-toggleable-sm @((ViewContext.HttpContext.Request.Query["color"].ToString()) ?? (User.Identity.IsAuthenticated ? "bg-success" : "bg-primary")) border-bottom box-shadow mb-3">
+            class="navbar navbar-expand-sm navbar-toggleable-sm @backgroundColor border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ASP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
